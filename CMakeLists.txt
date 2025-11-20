@@ -7,7 +7,7 @@ set(BUILD_SHARED_LIBS OFF CACHE INTERNAL BOOL FORCE)
 
 # Use exist cmake project
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/boringssl")
-
+add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/gflags")
 
 
 add_subdirectory(cmake)

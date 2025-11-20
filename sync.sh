@@ -15,7 +15,27 @@ GIT_CLONE_REPOS=(
     "platform/external/avb"
     "platform/external/gflags"
     "platform/external/boringssl"
-    "platform/system/core"
+    "platform/system/core" # fs_mgr/libsnapshot
+    "platform/external/libchrome"
+    "platform/external/xz-embedded"
+    "platform/external/lzma"
+    "platform/external/libbrillo"
+    "platform/external/bsdiff"
+    "platform/external/bzip2"
+    "platform/external/brotli"
+    "platform/external/fec" # libfec_rs
+    "platform/external/puffin"
+    "platform/system/extras" # libverity_tree
+    "platform/external/zlib"
+    "platform/external/zstd"
+    "platform/external/lz4"
+    "platform/system/libbase"
+    "platform/system/libziparchive"
+    "platform/external/libdivsufsort"
+    "platform/external/zucchini"
+    "platform/external/erofs-utils"
+    "platform/external/selinux"
+    "platform/external/e2fsprogs"
 )
 
 # disable detached HEAD warning
