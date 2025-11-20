@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.18)
 
 project(update_engine)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
@@ -28,5 +28,9 @@ set(EVENT__DISABLE_SAMPLES ON CACHE INTERNAL "")
 #set(EVENT__DISABLE_CLOCK_GETTIME OFF CACHE INTERNAL "")
 #set(EVENT__FORCE_KQUEUE_CHECK OFF CACHE INTERNAL "")
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/libevent")
+
+set(BUILD_GMOCK OFF CACHE INTERNAL "")
+set(INSTALL_GTEST OFF CACHE INTERNAL "")
+add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/googletest")
 
 add_subdirectory(cmake)

@@ -40,6 +40,7 @@ GIT_CLONE_REPOS=(
     "platform/external/e2fsprogs"
     "platform/external/fmtlib"
     "platform/external/modp_b64"
+    "platform/external/googletest"
 )
 
 # disable detached HEAD warning

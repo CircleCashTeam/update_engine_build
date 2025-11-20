@@ -1,5 +1,7 @@
 include(CheckSymbolExists)
 
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(target chrome)
 set(target_dir "${CMAKE_SOURCE_DIR}/platform/external/libchrome")
 
@@ -471,6 +473,10 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
     )
 endif()
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    list(APPEND libchrome_defaults_cflags "-Wno-vla-cxx-extension")
+endif()
+
 set(libchromeCommonSrc
     "${target_dir}/base/at_exit.cc"
     "${target_dir}/base/barrier_closure.cc"
@@ -772,4 +778,28 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Android")
     )
 endif()
 
+# Generate headers
+foreach(file ${libchrome_include_sources})
+    string(REPLACE "${target_dir}/" "" relative_file ${file})
+    add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/libchrome_includes/${relative_file}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${file}
+                ${CMAKE_BINARY_DIR}/libchrome_includes/${relative_file}
+        DEPENDS ${file}
+    )
+    list(APPEND ALL_COPIED_FILES ${CMAKE_BINARY_DIR}/libchrome_includes/${relative_file})
+endforeach()
+
+add_custom_target(copy_all_files ALL
+    DEPENDS ${ALL_COPIED_FILES}
+)
+
 add_library(${target} ${target_srcs})
+add_dependencies(${target} copy_all_files)
+target_compile_options(${target} PRIVATE ${libchrome_defaults_cflags})
+target_link_libraries(${target} PRIVATE base event modpb64 gtest)
+target_include_directories(${target} PRIVATE "${CMAKE_BINARY_DIR}/libchrome_includes")
+if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    target_link_libraries(${target} PRIVATE cutils log)
+endif()
