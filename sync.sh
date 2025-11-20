@@ -39,6 +39,7 @@ GIT_CLONE_REPOS=(
     "platform/external/selinux"
     "platform/external/e2fsprogs"
     "platform/external/fmtlib"
+    "platform/external/modp_b64"
 )
 
 # disable detached HEAD warning
