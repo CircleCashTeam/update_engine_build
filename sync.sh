@@ -29,13 +29,16 @@ GIT_CLONE_REPOS=(
     "platform/external/zlib"
     "platform/external/zstd"
     "platform/external/lz4"
+    "platform/system/logging"
     "platform/system/libbase"
+    "platform/external/libevent"
     "platform/system/libziparchive"
     "platform/external/libdivsufsort"
     "platform/external/zucchini"
     "platform/external/erofs-utils"
     "platform/external/selinux"
     "platform/external/e2fsprogs"
+    "platform/external/fmtlib"
 )
 
 # disable detached HEAD warning
