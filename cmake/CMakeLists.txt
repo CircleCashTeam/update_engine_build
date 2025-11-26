@@ -13,6 +13,13 @@ include("libchrome.cmake")
 # compress lib
 include("libxz.cmake")
 include("libbz.cmake")
+include("libbrotli.cmake")
 
 include("libfec.cmake")
 include("protobuf.cmake")
+include("libdivsufsort.cmake")
+include("libbsdiff.cmake")
+include("libzucchini.cmake")
+include("puffin.cmake")
+include("libsparse.cmake")
+include("libverity_tree.cmake")
