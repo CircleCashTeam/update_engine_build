@@ -12,9 +12,14 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL BOOL FORCE)
 
+if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+    set(CMAKE_LINKER lld)
+endif()
+
 # Use exist cmake project
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/boringssl")
-add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/gflags")
+#add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/gflags")
 
 set(EVENT__DISABLE_DEBUG_MODE ON CACHE INTERNAL "")
 #set(EVENT__ENABLE_VERBOSE_DEBUG OFF CACHE INTERNAL "")

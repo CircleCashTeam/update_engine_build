@@ -464,6 +464,7 @@ set(libchrome_defaults_cflags
         ## icu_utf.cc:161,165 have -Wno-implicit-fallthrough.
         "-Wno-missing-field-initializers"
         "-Wno-unused-parameter"
+        "-Wno-nonnull" # clang 21
 )
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
