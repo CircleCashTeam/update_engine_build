@@ -37,5 +37,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/libevent")
 set(BUILD_GMOCK OFF CACHE INTERNAL "")
 set(INSTALL_GTEST OFF CACHE INTERNAL "")
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/googletest")
+set(ENABLE_SIMD_OPTIMIZATIONS ON CACHE INTERNAL "")
+add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/zlib")
 
 add_subdirectory(cmake)

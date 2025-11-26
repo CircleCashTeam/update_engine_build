@@ -38,9 +38,11 @@ GIT_CLONE_REPOS=(
     "platform/external/erofs-utils"
     "platform/external/selinux"
     "platform/external/e2fsprogs"
+    "platform/external/squashfs-tools"
     "platform/external/fmtlib"
     "platform/external/modp_b64"
     "platform/external/googletest"
+    "platform/external/protobuf"
 )
 
 # disable detached HEAD warning
