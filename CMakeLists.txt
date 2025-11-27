@@ -28,6 +28,11 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -s")
 endif()
 
+find_library(LIBCXXABI_STATIC libc++abi.a)
+if(LIBCXXABI_STATIC)
+    link_libraries(${LIBCXXABI_STATIC})
+endif()
+
 # Use exist cmake project
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/boringssl")
 #add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/gflags")

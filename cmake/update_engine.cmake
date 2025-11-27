@@ -282,17 +282,17 @@ add_executable(${target} "${target_dir}/payload_generator/generate_delta_main.cc
 target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxflags})
 target_include_directories(${target} PRIVATE ${ue_default_includes})
 target_link_libraries(${target} PRIVATE
+    -Wl,--start-group
     avb_host_sysdeps
     payload_consumer
     payload_generator
     gflags
     protobuf-cpp-full
+    -Wl,--end-group
 )
 target_link_options(${target} PRIVATE "-Wl,--gc-sections")
 if(PREFER_STATIC_LINKING)
     target_link_options(${target} PRIVATE 
-    "-static"     
-    "-Wl,--warn-common"
-    "-Wl,--allow-multiple-definition")
-    target_link_libraries(${target} PRIVATE c++abi)
+        "-static"
+    )
 endif()

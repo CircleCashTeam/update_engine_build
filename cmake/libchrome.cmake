@@ -775,6 +775,11 @@ endif()
 if(HAVE_GLIBC)
     message(STATUS "libchrome use glibc sources")
     list(APPEND libchrome_defaults_cflags "-fno-exceptions")
+    list(APPEND libchrome_defaults_cflags "-DDISABLE_ALLOCATOR_SHIM")
+    
+    list(REMOVE_ITEM libchromeGlibcSrc 
+        "${target_dir}/base/allocator/allocator_shim.cc"
+    )
     list(APPEND target_srcs
         ${libchromeGlibcSrc}
     )
