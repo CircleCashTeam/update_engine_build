@@ -57,6 +57,3 @@ target_include_directories(${target}
     PUBLIC ${target_includes} 
     PRIVATE "${target_dir}/compat"
 )
-target_compile_options(${target} PRIVATE
-    "-DEVENT__DISABLE_ARC4RANDOM=1"
-)

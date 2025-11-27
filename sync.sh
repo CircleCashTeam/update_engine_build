@@ -43,6 +43,7 @@ GIT_CLONE_REPOS=(
     "platform/external/modp_b64"
     "platform/external/googletest"
     "platform/external/protobuf"
+    "platform/external/pcre"
 )
 
 # disable detached HEAD warning
