@@ -7,10 +7,9 @@ set(target_cflags
 )
 
 set(target_srcs "${target_dir}/modp_b64.cc")
-set(target_includes ${target_dir})
 
 add_library(${target} ${target_srcs})
 target_include_directories(${target} 
-    PUBLIC ${target_includes} 
+    PUBLIC ${target_dir}
     PRIVATE "${target_dir}/modp_b64"
 )

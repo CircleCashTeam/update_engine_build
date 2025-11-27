@@ -14,6 +14,7 @@ set(ue_default_cflags
     "-fstack-protector-strong"
     "-fvisibility=hidden"
     "-g3"
+    "-Wno-macro-redefined" # maybe unsafe
 CACHE INTERNAL "")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Android")
@@ -28,7 +29,12 @@ set(ue_default_cxxflags
     "-fno-strict-aliasing"
 CACHE INTERNAL "")
 
+set(libupdate_engine_headers
+    "${CMAKE_SOURCE_DIR}/platform/system/update_engine"
+CACHE INTERNAL "")
+
 set(ue_default_includes
+    ${libupdate_engine_headers}
     "${CMAKE_SOURCE_DIR}/platform/system"
     "${CMAKE_SOURCE_DIR}/platform/system/update_engine/client_library/include"
 CACHE INTERNAL "")
@@ -37,6 +43,9 @@ set(ue_default_ldflags
     "-Wl,--gc-sections"
 CACHE INTERNAL "")
 
-set(libupdate_engine_headers
-    "${CMAKE_SOURCE_DIR}/platform/system/update_engine"
-CACHE INTERNAL "")
+set(ue_default_libs
+    base
+    brillo-stream
+    brillo
+    chrome
+)

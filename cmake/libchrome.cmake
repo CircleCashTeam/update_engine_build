@@ -1,4 +1,4 @@
-include(CheckSymbolExists)
+include(CheckCSourceCompiles)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -739,41 +739,56 @@ set(libchromeAndroidSrc
     "${target_dir}/base/time/time_android.cc"
 )
 
-
-
 set(target_srcs
     ${libchromeCommonSrc}
 )
 
-check_symbol_exists(__BIONIC__ "" HAVE_BIONIC)
-check_symbol_exists(__GLIBC__ "" HAVE_GLIBC)
-check_symbol_exists(__MUSL__ "" HAVE_MUSL)
+if(NOT (HAVE_GLIBC OR HAVE_BIONIC OR HAVE_MUSL))
+    message(STATUS "No libc detected, defaulting to GLIBC for Linux")
+    if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
+        set(HAVE_GLIBC 1)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "Android")
+        set(HAVE_BIONIC 1)
+    else()
+        message(FATAL_ERROR "Please specify libc: -DHAVE_GLIBC=1 or -DHAVE_MUSL=1 or -DHAVE_BIONIC=1")
+    endif()
+endif()
+
+message(STATUS "HAVE_BIONIC: ${HAVE_BIONIC}")
+message(STATUS "HAVE_GLIBC: ${HAVE_GLIBC}")
+message(STATUS "HAVE_MUSL: ${HAVE_MUSL}")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    message(STATUS "libchrome use Linux sources")
     list(APPEND target_srcs
         ${libchromeLinuxSrc}
     )
 endif()
 
 if(HAVE_BIONIC)
+    message(STATUS "libchrome use bionic sources")
     list(APPEND target_srcs
         ${libchromeLinuxBionicSrc}
     )
 endif()
 
 if(HAVE_GLIBC)
+    message(STATUS "libchrome use glibc sources")
+    list(APPEND libchrome_defaults_cflags "-fno-exceptions")
     list(APPEND target_srcs
         ${libchromeGlibcSrc}
     )
 endif()
 
-if(HAVE_MUSL) 
+if(HAVE_MUSL)
+    message(STATUS "libchrome use musl sources")
     list(APPEND target_srcs
         ${libchromeMuslSrc}
     )
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    message(STATUS "libchrome with android libs")
     list(APPEND target_srcs
         ${libchromeAndroidSrc}
     )
@@ -796,9 +811,9 @@ add_custom_target(copy_all_files ALL
     DEPENDS ${ALL_COPIED_FILES}
 )
 
-add_library(${target} ${target_srcs})
+add_library(${target} STATIC ${target_srcs})
 add_dependencies(${target} copy_all_files)
-target_compile_options(${target} PRIVATE ${libchrome_defaults_cflags})
+target_compile_options(${target} PUBLIC ${libchrome_defaults_cflags})
 target_link_libraries(${target} PRIVATE base event modpb64 gtest)
 target_include_directories(${target} PUBLIC "${CMAKE_BINARY_DIR}/libchrome_includes")
 if(CMAKE_SYSTEM_NAME STREQUAL "Android")

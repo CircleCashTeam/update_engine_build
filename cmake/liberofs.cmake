@@ -58,5 +58,5 @@ list(REMOVE_ITEM target_srcs
 
 add_library(${target} ${target_srcs})
 target_include_directories(${target} PUBLIC "${target_dir}/include")
-target_compile_options(${target} PRIVATE ${target_cflags})
+target_compile_options(${target} PUBLIC ${target_cflags})
 target_link_libraries(${target} PRIVATE base cutils ext2_uuid log lz4 selinux)

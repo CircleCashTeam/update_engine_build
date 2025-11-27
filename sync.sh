@@ -44,6 +44,7 @@ GIT_CLONE_REPOS=(
     "platform/external/googletest"
     "platform/external/protobuf"
     "platform/external/pcre"
+    "platform/system/tools/mkbootimg"
 )
 
 # disable detached HEAD warning

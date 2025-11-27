@@ -46,7 +46,10 @@ set(target_includes
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     list(APPEND target_srcs "${target_dir}/epoll.c")
-    list(APPEND target_cflags "-D_GNU_SOURCE=1")
+    list(APPEND target_cflags "-D_GNU_SOURCE=1"
+        "-DANDROID_HOST_MUSL" # dirty impl
+        "-DEVENT__HAVE_ARC4RANDOM=1" # newer glibc already have this
+    )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     list(APPEND target_srcs "${target_dir}/kqueue.c")
 endif()
