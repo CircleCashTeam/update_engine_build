@@ -30,9 +30,13 @@ CACHE INTERNAL "")
 
 set(ue_default_includes
     "${CMAKE_SOURCE_DIR}/platform/system"
-    "${CMAKE_SOURCE_DIR}/update_engine/client_library/include"
+    "${CMAKE_SOURCE_DIR}/platform/system/update_engine/client_library/include"
 CACHE INTERNAL "")
 
 set(ue_default_ldflags
     "-Wl,--gc-sections"
+CACHE INTERNAL "")
+
+set(libupdate_engine_headers
+    "${CMAKE_SOURCE_DIR}/platform/system/update_engine"
 CACHE INTERNAL "")
