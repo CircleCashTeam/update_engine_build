@@ -8,6 +8,7 @@ set(protobuf_cflags
         "-Wno-error=user-defined-warnings"
         "-Wno-deprecated-enum-enum-conversion" # clang21
         "-Wno-deprecated-pragma" # clang21
+        "-Wno-invalid-noreturn"
 )
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND protobuf_cflags

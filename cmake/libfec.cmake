@@ -64,6 +64,7 @@ set(target_cxxflags
         "-Werror"
         "-O3"
         "-D_LARGEFILE64_SOURCE"
+        "-Wno-format-extra-args"
 )
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
