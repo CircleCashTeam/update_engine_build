@@ -175,7 +175,7 @@ set(target_srcs
 add_library(${target} ${target_srcs})
 target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxflags}
     "-Wno-inconsistent-missing-override"
-    "-Wno-deprecated-declarations-switch-case"
+    "-Wno-deprecated-declarations"
 )
 target_include_directories(${target} PRIVATE ${ue_default_includes})
 target_link_libraries(${target} PUBLIC
@@ -246,8 +246,6 @@ add_library(${target} ${target_srcs})
 target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxflags}
     "-Wno-inconsistent-missing-override"
     "-Wno-unused-variable"
-    "-std=gnu++20"
-    "-Wno-gnu"
     "-Wno-c99-designator"
 )
 target_include_directories(${target} PRIVATE ${ue_default_includes} ${bootimg_headers})

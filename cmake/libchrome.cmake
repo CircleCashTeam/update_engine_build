@@ -819,7 +819,7 @@ add_custom_target(copy_all_files ALL
 add_library(${target} STATIC ${target_srcs})
 add_dependencies(${target} copy_all_files)
 target_compile_options(${target} PUBLIC ${libchrome_defaults_cflags})
-target_link_libraries(${target} PRIVATE base event modpb64 gtest)
+target_link_libraries(${target} PRIVATE base event modpb64 PUBLIC gtest)
 target_include_directories(${target} PUBLIC "${CMAKE_BINARY_DIR}/libchrome_includes")
 if(CMAKE_SYSTEM_NAME STREQUAL "Android")
     target_link_libraries(${target} PRIVATE cutils log)
