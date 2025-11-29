@@ -19,6 +19,10 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND target_cflags "-mno-ms-bitfields")
 endif()
 
+list(APPEND target_cflags
+    "-DINCFS_SUPPORT_DISABLED=1"
+)
+
 set(target_srcs
         "${target_dir}/zip_archive.cc"
         "${target_dir}/zip_archive_stream_entry.cc"

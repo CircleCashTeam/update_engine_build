@@ -686,7 +686,7 @@ set(libchromeLinuxSrc
     "${target_dir}/base/memory/shared_memory_posix.cc"
     "${target_dir}/base/posix/unix_domain_socket.cc"
     "${target_dir}/base/process/internal_linux.cc"
-    "${target_dir}/base/process/memory_linux.cc"
+    #"${target_dir}/base/process/memory_linux.cc"
     "${target_dir}/base/process/process_handle_linux.cc"
     "${target_dir}/base/process/process_info_linux.cc"
     "${target_dir}/base/process/process_iterator_linux.cc"
@@ -758,7 +758,7 @@ message(STATUS "HAVE_BIONIC: ${HAVE_BIONIC}")
 message(STATUS "HAVE_GLIBC: ${HAVE_GLIBC}")
 message(STATUS "HAVE_MUSL: ${HAVE_MUSL}")
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if(CMAKE_SYSTEM_NAME MATCHES "Linux|Android")
     message(STATUS "libchrome use Linux sources")
     list(APPEND target_srcs
         ${libchromeLinuxSrc}
@@ -792,12 +792,13 @@ if(HAVE_MUSL)
     )
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Android")
-    message(STATUS "libchrome with android libs")
-    list(APPEND target_srcs
-        ${libchromeAndroidSrc}
-    )
-endif()
+# Not need in this project
+#if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+#    message(STATUS "libchrome with android libs")
+#    list(APPEND target_srcs
+#        ${libchromeAndroidSrc}
+#    )
+#endif()
 
 # Generate headers
 foreach(file ${libchrome_include_sources})
@@ -822,5 +823,6 @@ target_compile_options(${target} PUBLIC ${libchrome_defaults_cflags})
 target_link_libraries(${target} PRIVATE base event modpb64 PUBLIC gtest)
 target_include_directories(${target} PUBLIC "${CMAKE_BINARY_DIR}/libchrome_includes")
 if(CMAKE_SYSTEM_NAME STREQUAL "Android")
-    target_link_libraries(${target} PRIVATE cutils log)
+    target_link_libraries(${target} PUBLIC cutils log)
+    target_compile_options(${target} PUBLIC -U__ANDROID__)
 endif()

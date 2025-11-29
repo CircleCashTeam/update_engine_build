@@ -12,11 +12,11 @@ set(liblog_sources
 )
 
 set(liblog_target_sources
-    "${target_dir}/event_tag_map.cpp"
-    "${target_dir}/log_time.cpp"
-    "${target_dir}/pmsg_reader.cpp"
+    #"${target_dir}/event_tag_map.cpp"
+    #"${target_dir}/log_time.cpp"
+    #"${target_dir}/pmsg_reader.cpp"
     "${target_dir}/pmsg_writer.cpp"
-    "${target_dir}/logd_reader.cpp"
+    #"${target_dir}/logd_reader.cpp"
     "${target_dir}/logd_writer.cpp"
 )
 
@@ -47,6 +47,12 @@ set(liblog_cflags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     list(APPEND liblog_cflags 
         "-Wno-c99-designator"
+    )
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    list(APPEND liblog_sources
+        ${liblog_target_sources}
     )
 endif()
 

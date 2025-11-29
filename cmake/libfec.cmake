@@ -71,7 +71,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     list(APPEND target_cxxflags "-Wno-vla-cxx-extension")
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if(CMAKE_SYSTEM_NAME MATCHES "Linux|Android")
     list(APPEND target_srcs "${target_dir}/avb_utils.cpp")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     list(APPEND target_srcs "${target_dir}/avb_utils_stub.cpp")
@@ -86,12 +86,12 @@ target_link_libraries(${target}
     PUBLIC crypto_utils
     PRIVATE base crypto crypto_utils cutils ext4_utils squashfs_utils fec_rs
 )
-if(NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
+#if(NOT CMAKE_SYSTEM_NAME STREQUAL "Android")
     target_compile_options(${target} PRIVATE
                 "-D_GNU_SOURCE"
                 "-DFEC_NO_KLOG"
     )
-endif()
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+#endif()
+if(CMAKE_SYSTEM_NAME MATCHES "Linux|Android")
     target_link_libraries(${target} PRIVATE avb)
 endif()

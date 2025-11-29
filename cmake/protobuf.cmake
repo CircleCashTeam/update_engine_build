@@ -221,14 +221,24 @@ target_include_directories(protoc PUBLIC
     "${target_dir}/src"
     "${target_dir}/config"
 )
-
-add_executable(aprotoc "${target_dir}/src/google/protobuf/compiler/main.cc")
-target_compile_definitions(aprotoc PRIVATE "-DHAVE_ZLIB=1")
-target_link_libraries(aprotoc PRIVATE 
-    protoc
-    protobuf-cpp-full
-    zlibstatic
-)
+message(STATUS "CMAKE_CROSSCOMPILING: ${CMAKE_CROSSCOMPILING}")
+if(NOT CMAKE_CROSSCOMPILING)
+    add_executable(aprotoc "${target_dir}/src/google/protobuf/compiler/main.cc")
+    target_compile_definitions(aprotoc PRIVATE "-DHAVE_ZLIB=1")
+    target_link_libraries(aprotoc PRIVATE 
+        protoc
+        protobuf-cpp-full
+        zlibstatic
+    )
+    set(my_protobuf_generate_cpp_dep aprotoc)
+    
+    set(aprotoc_path "$<TARGET_FILE:aprotoc>")
+    if(PREFER_STATIC_LINKING)
+        target_link_options(aprotoc PRIVATE "-static")
+    endif()
+else()
+    set(aprotoc_path "${CMAKE_SOURCE_DIR}/prebuilt/aprotoc")
+endif()
 
 function(my_protobuf_generate_cpp SOURCES_VAR HEADERS_VAR)
     set(PROTO_FILES ${ARGN})
@@ -246,11 +256,11 @@ function(my_protobuf_generate_cpp SOURCES_VAR HEADERS_VAR)
         
         add_custom_command(
             OUTPUT ${GENERATED_SRC} ${GENERATED_HEADER}
-            COMMAND ${CMAKE_BINARY_DIR}/cmake/aprotoc
+            COMMAND ${aprotoc_path}
             ARGS --cpp_out=${CMAKE_CURRENT_BINARY_DIR}
                  -I ${PROTO_DIR}
                  ${PROTO_ABS_PATH}
-            DEPENDS ${PROTO_ABS_PATH} aprotoc
+            DEPENDS ${PROTO_ABS_PATH} ${my_protobuf_generate_cpp_dep}
             COMMENT "Generating C++ code from ${PROTO_NAME_WE}.proto"
             VERBATIM
         )

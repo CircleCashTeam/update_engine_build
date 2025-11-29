@@ -276,16 +276,20 @@ target_link_libraries(${target} PUBLIC
 
 # delta_generator
 set(target delta_generator)
-add_executable(${target} "${target_dir}/payload_generator/generate_delta_main.cc")
-target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxflags})
-target_include_directories(${target} PRIVATE ${ue_default_includes})
-target_link_libraries(${target} PRIVATE
-    -Wl,--start-group
+set(target_link_libs
     avb_host_sysdeps
     payload_consumer
     payload_generator
     gflags
     protobuf-cpp-full
+)
+
+add_executable(${target} "${target_dir}/payload_generator/generate_delta_main.cc")
+target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxflags})
+target_include_directories(${target} PRIVATE ${ue_default_includes})
+target_link_libraries(${target} PRIVATE
+    -Wl,--start-group
+    ${target_link_libs}
     -Wl,--end-group
 )
 target_link_options(${target} PRIVATE "-Wl,--gc-sections")

@@ -73,9 +73,18 @@ set(target_srcs
 )
 
 # TODO: add android build rules
+if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    list(APPEND target_cflags 
+        "-DHAVE_STRLCPY"
+        "-DHAVE_REALLOCARRAY"
+    )
+    # In this project no need android_device.c and packagelistparser
+else()
+    list(APPEND target_cflags -DBUILD_HOST)
+endif()
 
 add_library(${target} ${target_srcs})
-target_compile_options(${target} PRIVATE ${target_cflags} -DBUILD_HOST)
+target_compile_options(${target} PRIVATE ${target_cflags})
 target_link_libraries(${target} PRIVATE pcre2 log base cutils)
 target_include_directories(${target}
     PRIVATE "${target_dir}/src"
