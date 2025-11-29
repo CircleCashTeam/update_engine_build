@@ -49,7 +49,7 @@ build() {
 
 
 if [ -z "$ARCH" ]; then # build all
-    for arch in "x86_64" "aarch64" "armv7a" "i686"; do
+    for arch in "x86_64" "armeabi-v7a" "arm64-v8a" "x86"; do
         build $arch
     done
 else
