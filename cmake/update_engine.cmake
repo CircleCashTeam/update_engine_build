@@ -247,7 +247,6 @@ target_compile_options(${target} PRIVATE ${ue_default_cflags} ${ue_default_cxxfl
     "-Wno-inconsistent-missing-override"
     "-Wno-unused-variable"
     "-Wno-c99-designator"
-    "-D_GNU_SOURCE"
     "-Dtypeof=__typeof__"
 )
 target_include_directories(${target} PRIVATE ${ue_default_includes} ${bootimg_headers})
@@ -273,7 +272,6 @@ target_link_libraries(${target} PUBLIC
     base
     ext2fs
     lz4
-    pcre2
     ${ue_default_libs}
 )
 
