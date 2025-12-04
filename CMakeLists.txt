@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.18)
 
 project(update_engine)
 
-#set(CMAKE_CXX_STANDARD 20)
-#set(CMAKE_C_STANDARD 17)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(CMAKE_C_STANDARD_REQUIRED ON)
-#set(CMAKE_C_EXTENSIONS ON)
-#set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_CXX_EXTENSIONS ON)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++20")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu17")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++20")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu17")
 
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL BOOL FORCE)
 
@@ -60,5 +60,6 @@ set(INSTALL_GTEST OFF CACHE INTERNAL "")
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/googletest")
 set(ENABLE_SIMD_OPTIMIZATIONS ON CACHE INTERNAL "")
 add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/zlib")
+add_subdirectory("${CMAKE_SOURCE_DIR}/platform/external/abseil-cpp")
 
 add_subdirectory(cmake)

@@ -13,6 +13,7 @@ set(target_srcs
         "${target_dir}/src/pcre2_chartables.c"
         "${target_dir}/src/pcre2_chkdint.c"
         "${target_dir}/src/pcre2_compile.c"
+        "${target_dir}/src/pcre2_compile_class.c"
         "${target_dir}/src/pcre2_config.c"
         "${target_dir}/src/pcre2_context.c"
         "${target_dir}/src/pcre2_convert.c"

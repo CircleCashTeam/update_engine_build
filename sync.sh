@@ -2,7 +2,7 @@
 
 source "scripts/log.sh"
 
-TAG="android-16.0.0_r3"
+TAG="android-16.0.0_r4"
 FETCH_FROM="https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/"
 SHALLOW_CLONE=true
 
@@ -45,6 +45,7 @@ GIT_CLONE_REPOS=(
     "platform/external/protobuf"
     "platform/external/pcre"
     "platform/system/tools/mkbootimg"
+    "platform/external/abseil-cpp"
 )
 
 # disable detached HEAD warning
