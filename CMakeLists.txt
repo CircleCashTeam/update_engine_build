@@ -26,14 +26,13 @@ if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
             link_libraries(${LIBCXXABI_STATIC})
         endif()
     endif()
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # lto
 endif()
 
 option(PREFER_STATIC_LINKING "link executable file with -static" OFF)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNDEBUG")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -s")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 endif()
