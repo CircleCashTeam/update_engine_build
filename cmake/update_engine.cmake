@@ -301,3 +301,6 @@ if(PREFER_STATIC_LINKING)
         "-static"
     )
 endif()
+if(CMAKE_SYSTEM_NAME STREQUAL "Android")
+    target_link_directories(${target} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+endif()

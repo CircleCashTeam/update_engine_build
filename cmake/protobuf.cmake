@@ -72,7 +72,7 @@ target_include_directories(protobuf-cpp-lite-tlsagnostic
             "${CMAKE_SOURCE_DIR}/platform/external/abseil-cpp"
 )
 target_compile_options(protobuf-cpp-lite-tlsagnostic PRIVATE ${protobuf_cflags})
-target_link_libraries(protobuf-cpp-lite-tlsagnostic PUBLIC log)
+#target_link_libraries(protobuf-cpp-lite-tlsagnostic PUBLIC log)
 #target_link_libraries(protobuf-cpp-lite-tlsagnostic PUBLIC
         #"absl_base_dynamic_annotations"
         #"absl_container_btree"
