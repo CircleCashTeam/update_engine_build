@@ -41,7 +41,7 @@ build() {
         logs "Build delta_generator success!"
         if [ -e "build/cmake/delta_generator" ]; then
             mkdir -p "out/$arch"
-            cp -rf "build/cmake/delta_generator" "out/$arch/"
+            cp -af "build/cmake/delta_generator" "out/$arch/"
             logs "Copied into out/$arch/delta_generator"
         fi
     fi
