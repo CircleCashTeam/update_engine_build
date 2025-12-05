@@ -3,7 +3,7 @@ set(target_dir "${CMAKE_SOURCE_DIR}/platform/external/libevent")
 
 set(target_cflags
     #"-D_BSD_SOURCE"
-    "-O3"
+    
     "-Wno-strict-aliasing"
     "-Wno-unused-parameter"
     "-Wno-tautological-compare"

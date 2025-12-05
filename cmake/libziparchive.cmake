@@ -34,4 +34,4 @@ set(target_srcs
 add_library(${target} ${target_srcs})
 target_compile_options(${target} PRIVATE ${target_cflags} ${target_cxxflags})
 target_include_directories(${target} PRIVATE "${target_dir}/incfs_support/include/" PUBLIC "${target_dir}/include")
-target_link_libraries(${target} PRIVATE base log gtest)
+target_link_libraries(${target} PRIVATE base log gtest zlibstatic)

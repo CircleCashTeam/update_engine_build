@@ -12,7 +12,7 @@ add_library(${target}
 )
 
 target_compile_options(${target} PRIVATE
-        "-O3"
+        
         "-DUSE_MMAP"
         "-Werror"
         "-Wno-unused-parameter"

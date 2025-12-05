@@ -62,7 +62,7 @@ set(target_srcs
 set(target_cxxflags
         "-Wall"
         "-Werror"
-        "-O3"
+        
         "-D_LARGEFILE64_SOURCE"
         "-Wno-format-extra-args"
 )

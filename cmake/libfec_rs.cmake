@@ -10,7 +10,7 @@ set(target_srcs
 set(target_cflags
         "-Wall"
         "-Werror"
-        "-O3"
+        
 )
 
 
