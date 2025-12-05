@@ -1,6 +1,14 @@
 # Update Engine Build
 Build delta_generator with cmake and link statically.
 
+## Requirements
+- clang19+
+- llvm19+
+- cmake 3.18+
+- ninja
+- lld19+
+- libc++-19+
+
 ## Prepare
 
 ### Debian
